@@ -9,6 +9,14 @@ class Justcoin
 
   attr_reader :key, :options, :client
 
+  # Creates a new Justcoin client.
+  #
+  # @param key the API key, get it from
+  #   https://justcoin.com/client/#settings/apikeys
+  # @param options the client can receive the following options
+  #   * `:log` [true/false] – whether to log requests and responses
+  #   * `:logger` [Logger] – a custom logger instance, implies `log: true`
+  #   * any other options are passed on to the Faraday client
   def initialize(key, options={})
     @key = key
 
