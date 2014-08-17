@@ -13,6 +13,8 @@ class Justcoin
     @key = key
 
     options[:url] ||= DEFAULT_URL
+    options[:params] ||= {}
+    options[:params][:key] ||= key
     @options = options
 
     @client = build_client
