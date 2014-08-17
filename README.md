@@ -1,6 +1,6 @@
 # Justcoin
 
-TODO: Write a gem description
+An API client for [Justcoin](https://justcoin.com/?r=VLM7U).
 
 ## Installation
 
@@ -18,7 +18,10 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+``` ruby
+client = Justcoin.new(ENV['JUSTCOIN_KEY'])
+client.balances # => { USD: { balance: 40.0, hold: 0.0, available: 40.0 }, STR: ... }
+```
 
 ## Contributing
 

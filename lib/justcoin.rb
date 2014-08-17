@@ -1,5 +1,5 @@
 require "justcoin/version"
 
-module Justcoin
+class Justcoin
   # Your code goes here...
 end

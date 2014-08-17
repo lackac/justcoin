@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Justcoin::VERSION
   spec.authors       = ["Laszlo Bacsi"]
   spec.email         = ["lackac@lackac.hu"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.description   = %q{Justcoin API client}
+  spec.summary       = %q{Justcoin API client}
+  spec.homepage      = "https://github.com/lackac/justcoin"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
