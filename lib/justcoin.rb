@@ -37,6 +37,14 @@ class Justcoin
     parse_response(response, 'currency')
   end
 
+  # List markets
+  #
+  # @return [Hash] a hash of all markets with their ids as keys
+  def markets
+    response = client.get 'markets'
+    parse_response(response, 'id')
+  end
+
   private
 
   def client_options

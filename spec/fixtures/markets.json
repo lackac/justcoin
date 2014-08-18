@@ -1,0 +1,18 @@
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Access-Control-Allow-Headers: Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type
+Access-Control-Allow-Methods: GET, POST, OPTIONS, PATCH, DELETE
+Access-Control-Allow-Origin: *
+Age: 0
+cache-control: max-age=0
+Content-Type: application/json; charset=utf-8
+Date: Sun, 17 Aug 2014 23:57:18 GMT
+ETag: W/"31a-1371539062"
+Strict-Transport-Security: max-age=31536000
+X-Cache: MISS
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+Content-Length: 794
+Connection: keep-alive
+
+[{"id":"BTCEUR","last":"376.777","high":"427.000","low":"371.112","bid":"371.760","ask":"385.410","volume":"16.88278","scale":3},{"id":"BTCLTC","last":"110.999","high":"111.000","low":"86.001","bid":"92.001","ask":"110.999","volume":"2.81474","scale":3},{"id":"BTCNOK","last":"3072.001","high":"3275.149","low":"3072.000","bid":"3075.034","ask":"3110.850","volume":"7.82705","scale":3},{"id":"BTCSTR","last":"210987.890","high":"212303.000","low":"201016.000","bid":"209090.100","ask":"210987.890","volume":"75.07222","scale":3},{"id":"BTCUSD","last":"500.714","high":"533.620","low":"488.501","bid":"495.751","ask":"513.999","volume":"3.92299","scale":3},{"id":"BTCXRP","last":"96800.000","high":"102762.000","low":"93100.000","bid":"93700.714","ask":"96800.000","volume":"7.71935","scale":3}]
