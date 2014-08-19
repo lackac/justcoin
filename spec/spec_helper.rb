@@ -50,3 +50,7 @@ end
 def bd(number)
   BigDecimal.new(number)
 end
+
+def t(time_string)
+  Time.parse(time_string)
+end

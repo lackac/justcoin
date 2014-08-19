@@ -54,6 +54,13 @@ class Justcoin
     client.get "markets/#{id.upcase}/depth"
   end
 
+  # Retrieve active user orders
+  #
+  # @return [Array] an array of the user's active orders
+  def orders
+    client.get "orders"
+  end
+
   private
 
   def client_options
@@ -70,6 +77,7 @@ class Justcoin
       f.use Justcoin::ResponseParser unless options[:raw]
 
       f.response :mashify
+      f.response :dates
       f.response :json, content_type: /\bjson$/
       f.response :logger, options[:logger] if options[:logger] || options[:log]
       f.response :raise_error

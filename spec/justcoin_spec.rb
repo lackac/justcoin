@@ -80,7 +80,7 @@ describe Justcoin do
       stub_get('/markets/BTCSTR/depth').with(query: {key: "somekey"}).to_return(fixture("market_depth.json"))
     end
 
-    it "returns the current market orders for the given market as arrays of bids and asks" do
+    it "returns the current orders for the given market as arrays of bids and asks" do
       response = justcoin.market_depth(:btcstr)
       expect(response.bids).to eq([
         [bd("226244.0"),  bd("0.0702")],
@@ -93,6 +93,20 @@ describe Justcoin do
         [bd("226698.0"),  bd("3.3")],
         [bd("226800.0"),  bd("0.59715")],
         [bd("226900.0"),  bd("1.53781")]
+      ])
+    end
+  end
+
+  describe '#orders' do
+    before do
+      stub_get('/orders').with(query: {key: "somekey"}).to_return(fixture("orders.json"))
+    end
+
+    it "returns the user's active orders" do
+      response = justcoin.orders
+      expect(response.map(&:to_hash)).to eq([
+        {'id' => 4054198, 'market' => "BTCSTR", 'type' => "ask", 'price' => bd("229494.0"), 'amount' => bd("0.00436"), 'remaining' => bd("0.00436"), 'matched' => bd("0.0"), 'cancelled' => bd("0.0"), 'createdAt' => t("2014-08-19T10:18:55.582Z")}, 
+        {'id' => 4054182, 'market' => "BTCSTR", 'type' => "bid", 'price' => bd("216777.0"), 'amount' => bd("0.00459"), 'remaining' => bd("0.00459"), 'matched' => bd("0.0"), 'cancelled' => bd("0.0"), 'createdAt' => t("2014-08-19T10:17:55.622Z")}
       ])
     end
   end

@@ -1,0 +1,18 @@
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Access-Control-Allow-Headers: Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type
+Access-Control-Allow-Methods: GET, POST, OPTIONS, PATCH, DELETE
+Access-Control-Allow-Origin: *
+Age: 0
+cache-control: max-age=0
+Content-Type: application/json; charset=utf-8
+Date: Tue, 19 Aug 2014 15:30:30 GMT
+ETag: W/"17b-2033545919"
+Strict-Transport-Security: max-age=31536000
+X-Cache: MISS
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+Content-Length: 379
+Connection: keep-alive
+
+[{"id":4054198,"market":"BTCSTR","type":"ask","price":"229494.000","amount":"0.00436","remaining":"0.00436","matched":"0.00000","cancelled":"0.00000","createdAt":"2014-08-19T10:18:55.582Z"},{"id":4054182,"market":"BTCSTR","type":"bid","price":"216777.000","amount":"0.00459","remaining":"0.00459","matched":"0.00000","cancelled":"0.00000","createdAt":"2014-08-19T10:17:55.622Z"}]
