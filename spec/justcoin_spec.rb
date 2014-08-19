@@ -75,4 +75,26 @@ describe Justcoin do
     end
   end
 
+  describe '#market_depth' do
+    before do
+      stub_get('/markets/BTCSTR/depth').with(query: {key: "somekey"}).to_return(fixture("market_depth.json"))
+    end
+
+    it "returns the current market orders for the given market as arrays of bids and asks" do
+      response = justcoin.market_depth(:btcstr)
+      expect(response.bids).to eq([
+        [bd("226244.0"),  bd("0.0702")],
+        [bd("225502.26"), bd("0.3")],
+        [bd("225500.0"),  bd("0.01651")],
+        [bd("225392.26"), bd("0.002")]
+      ])
+      expect(response.asks).to eq([
+        [bd("226697.0"),  bd("0.88946")],
+        [bd("226698.0"),  bd("3.3")],
+        [bd("226800.0"),  bd("0.59715")],
+        [bd("226900.0"),  bd("1.53781")]
+      ])
+    end
+  end
+
 end

@@ -46,6 +46,14 @@ class Justcoin
     client.get "markets"
   end
 
+  # Retrieve market depth
+  #
+  # @param [String/Symbol] id the id of the market (e.g. `:btcstr`)
+  # @return [Hashie::Mash] `bids` and `asks` as arrays of `[price, volume]` pairs
+  def market_depth(id)
+    client.get "markets/#{id.upcase}/depth"
+  end
+
   private
 
   def client_options
