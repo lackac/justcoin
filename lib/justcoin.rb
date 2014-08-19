@@ -55,6 +55,7 @@ class Justcoin
     Faraday.new(client_options) do |f|
       f.request :json
 
+      f.response :mashify
       f.response :json, content_type: /\bjson$/
       f.response :logger, options[:logger] if options[:logger] || options[:log]
       f.response :raise_error
@@ -65,20 +66,7 @@ class Justcoin
 
   def parse_response(response)
     return response if options[:raw]
-    symbolize_keys(response.body)
-  end
-
-  def symbolize_keys(value)
-    case value
-    when Array
-      value.map { |item| symbolize_keys(item) }
-    when Hash
-      value.each_with_object({}) do |(key, val), hash|
-        hash[(key.to_sym rescue key) || key] = symbolize_keys(val)
-      end
-    else
-      value
-    end
+    response.body
   end
 
 end
