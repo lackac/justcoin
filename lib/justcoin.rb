@@ -34,16 +34,16 @@ class Justcoin
 
   # List balances
   #
-  # @return [Hash] a hash of current balances with the currencies as keys
+  # @return [Array] an array of current balances
   def balances
-    client.get 'balances'
+    client.get "balances"
   end
 
   # List markets
   #
-  # @return [Hash] a hash of all markets with their ids as keys
+  # @return [Array] an array of markets with current statistics
   def markets
-    client.get 'markets'
+    client.get "markets"
   end
 
   private
