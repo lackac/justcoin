@@ -46,3 +46,7 @@ end
 def fixture(file)
   File.new(fixture_path + '/' + file)
 end
+
+def bd(number)
+  BigDecimal.new(number)
+end

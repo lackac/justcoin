@@ -1,3 +1,5 @@
+require "bigdecimal"
+
 class Justcoin
   class ResponseParser < Faraday::Middleware
 
@@ -8,8 +10,18 @@ class Justcoin
 
     private
 
-    def parse_response(body)
-      body
+    def parse_response(value)
+      case value
+      when Array
+        value.map! {|v| parse_response(v)}
+      when Hash, Hashie::Mash
+        value.each do |k, v|
+          value[k] = parse_response(v)
+        end
+      when /^\s*\d*\.\d+/
+        value = BigDecimal.new(value)
+      end
+      value
     end
 
   end
