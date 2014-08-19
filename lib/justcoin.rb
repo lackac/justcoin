@@ -61,6 +61,16 @@ class Justcoin
     client.get "orders"
   end
 
+  # Retrieve a specific user order
+  #
+  # Works for all kinds of orders: active, cancelled, or historical.
+  #
+  # @param id the id of the order
+  # @return [Hashie::Mash] information about the order including matches
+  def order(id)
+    client.get "orders/#{id}"
+  end
+
   private
 
   def client_options

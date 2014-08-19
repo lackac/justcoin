@@ -111,4 +111,29 @@ describe Justcoin do
     end
   end
 
+  describe '#order' do
+    before do
+      stub_get('/orders/3901787').with(query: {key: "somekey"}).to_return(fixture("order.json"))
+    end
+
+    it "returns information about a specific order" do
+      response = justcoin.order(3901787)
+      expect(response.to_hash).to eq({
+        'id' => 3901787,
+        'createdAt' => t("2014-08-13T09:44:14.093Z"),
+        'market' => "BTCSTR",
+        'type' => "ask",
+        'price' => bd("197999.0"),
+        'original' => bd("0.0803"),
+        'matched' => bd("0.0803"),
+        'canceled' => bd("0.0"),
+        'remaining' => bd("0.0"),
+        'matches' => [
+          {'id' => 186158, 'createdAt' => t("2014-08-13T09:44:53.274Z"), 'price' => bd("197999.0"), 'amount' => bd("0.00522")},
+          {'id' => 186159, 'createdAt' => t("2014-08-13T09:45:00.747Z"), 'price' => bd("197999.0"), 'amount' => bd("0.07508")}
+        ]
+      })
+    end
+  end
+
 end
