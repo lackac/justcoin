@@ -34,7 +34,7 @@ class Justcoin
   # @return [Hash] a hash of current balances with the currencies as keys
   def balances
     response = client.get 'balances'
-    parse_response(response, 'currency')
+    parse_response(response)
   end
 
   # List markets
@@ -42,7 +42,7 @@ class Justcoin
   # @return [Hash] a hash of all markets with their ids as keys
   def markets
     response = client.get 'markets'
-    parse_response(response, 'id')
+    parse_response(response)
   end
 
   private
@@ -63,17 +63,9 @@ class Justcoin
     end
   end
 
-  def parse_response(response, key=nil)
+  def parse_response(response)
     return response if options[:raw]
-    parsed = symbolize_keys(response.body)
-    parsed = items_by_key(parsed, key.to_sym) if key
-    parsed
-  end
-
-  def items_by_key(array_of_hashes, key)
-    array_of_hashes.each_with_object({}) do |item, hash|
-      hash[item.delete(key).to_sym] = item
-    end
+    symbolize_keys(response.body)
   end
 
   def symbolize_keys(value)
