@@ -2,6 +2,7 @@ require "faraday"
 require "faraday_middleware"
 
 require "justcoin/version"
+require "justcoin/response_parser"
 
 class Justcoin
 
@@ -33,16 +34,14 @@ class Justcoin
   #
   # @return [Hash] a hash of current balances with the currencies as keys
   def balances
-    response = client.get 'balances'
-    parse_response(response)
+    client.get 'balances'
   end
 
   # List markets
   #
   # @return [Hash] a hash of all markets with their ids as keys
   def markets
-    response = client.get 'markets'
-    parse_response(response)
+    client.get 'markets'
   end
 
   private
@@ -55,6 +54,11 @@ class Justcoin
     Faraday.new(client_options) do |f|
       f.request :json
 
+      # This extracts the body and discards all other data from the
+      # Faraday::Response object. It should be placed here in the middle
+      # of the stack so that it runs as the last one.
+      f.use Justcoin::ResponseParser unless options[:raw]
+
       f.response :mashify
       f.response :json, content_type: /\bjson$/
       f.response :logger, options[:logger] if options[:logger] || options[:log]
@@ -62,11 +66,6 @@ class Justcoin
 
       f.adapter Faraday.default_adapter
     end
-  end
-
-  def parse_response(response)
-    return response if options[:raw]
-    response.body
   end
 
 end
