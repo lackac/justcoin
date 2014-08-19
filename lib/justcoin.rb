@@ -25,6 +25,8 @@ class Justcoin
     options[:url] ||= DEFAULT_URL
     options[:params] ||= {}
     options[:params][:key] ||= key
+    options[:headers] ||= {}
+    options[:headers][:user_agent] ||= "Justcoin ruby client v#{Justcoin::VERSION}"
     @options = options
 
     @client = build_client
