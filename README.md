@@ -1,6 +1,10 @@
 # Justcoin
 
-An API client for [Justcoin](https://justcoin.com/?r=VLM7U).
+API client for [Justcoin](https://justcoin.com/?r=VLM7U).
+
+[![Gem Version](http://img.shields.io/gem/v/justcoin.svg)](https://rubygems.org/gems/justcoin)
+[![Build Status](http://img.shields.io/travis/lackac/justcoin.svg)](https://travis-ci.org/lackac/justcoin)
+[![Code Climate](http://img.shields.io/codeclimate/github/lackac/justcoin.svg)](https://codeclimate.com/github/lackac/justcoin)
 
 ## Installation
 
