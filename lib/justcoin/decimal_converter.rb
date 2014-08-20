@@ -1,11 +1,12 @@
 require "bigdecimal"
 
 class Justcoin
-  class ResponseParser < Faraday::Middleware
+  class DecimalConverter < Faraday::Middleware
 
     def call(env)
       response = @app.call(env)
       parse_response response.env[:body]
+      response
     end
 
     private

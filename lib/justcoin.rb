@@ -2,7 +2,8 @@ require "faraday"
 require "faraday_middleware"
 
 require "justcoin/version"
-require "justcoin/response_parser"
+require "justcoin/body_extractor"
+require "justcoin/decimal_converter"
 
 class Justcoin
 
@@ -81,10 +82,13 @@ class Justcoin
     Faraday.new(client_options) do |f|
       f.request :json
 
-      # This extracts the body and discards all other data from the
-      # Faraday::Response object. It should be placed here in the middle
-      # of the stack so that it runs as the last one.
-      f.use Justcoin::ResponseParser unless options[:raw]
+      unless options[:raw]
+        # This extracts the body and discards all other data from the
+        # Faraday::Response object. It should be placed here in the middle
+        # of the stack so that it runs as the last one.
+        f.use Justcoin::BodyExtractor
+        f.use Justcoin::DecimalConverter
+      end
 
       f.response :mashify
       f.response :dates
