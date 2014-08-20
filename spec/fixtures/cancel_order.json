@@ -1,0 +1,14 @@
+HTTP/1.1 204 No Content
+Accept-Ranges: bytes
+Access-Control-Allow-Headers: Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type
+Access-Control-Allow-Methods: GET, POST, OPTIONS, PATCH, DELETE
+Access-Control-Allow-Origin: *
+Age: 0
+cache-control: max-age=0
+Date: Wed, 20 Aug 2014 20:02:00 GMT
+Strict-Transport-Security: max-age=31536000
+X-Cache: MISS
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+Connection: keep-alive
+

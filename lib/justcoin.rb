@@ -72,6 +72,38 @@ class Justcoin
     client.get "orders/#{id}"
   end
 
+  # Create an order
+  #
+  # @param [String/Symbol] market the id of the market (e.g. `:btcstr`)
+  # @param type the order type; can be `:bid` (buy base currency) or `:ask` (sell base currency)
+  # @param [Numeric/String/nil] price the order price; if set to `nil`,
+  #   the order is placed as a market order
+  # @param [Numeric/String] amount the amount of base currency
+  #   (identified by the first three letters of the market id) to buy/sell
+  # @return [Hashie::Mash] includes the order id if the order is successfully created
+  def create_order(market, type, price, amount)
+    type = type.downcase.to_sym
+    raise ArgumentError, "type must be either :bid or :ask" unless [:bid, :ask].include?(type)
+
+    params = {
+      market: market.upcase,
+      type: type,
+      price: price,
+      amount: amount
+    }
+
+    client.post "orders", params
+  end
+  alias_method :place_order, :create_order
+
+  # Cancel the remainder of the specified order
+  #
+  # @param id the id of the order
+  # @return true if cancelling the order was successful
+  def cancel_order(id)
+    client.delete("orders/#{id}") == ""
+  end
+
   private
 
   def client_options
@@ -80,8 +112,6 @@ class Justcoin
 
   def build_client
     Faraday.new(client_options) do |f|
-      f.request :json
-
       unless options[:raw]
         # This extracts the body and discards all other data from the
         # Faraday::Response object. It should be placed here in the middle
@@ -90,6 +120,7 @@ class Justcoin
         f.use Justcoin::DecimalConverter
       end
 
+      f.request :json
       f.response :mashify
       f.response :dates
       f.response :json, content_type: /\bjson$/

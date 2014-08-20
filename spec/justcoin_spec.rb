@@ -136,4 +136,36 @@ describe Justcoin do
     end
   end
 
+  describe '#create_order' do
+    it "accepts only :bid or :ask for the type argument" do
+      expect(-> { justcoin.create_order(:btcstr, :foo, 0, 0) }).to raise_error(ArgumentError)
+    end
+
+    it "converts amount and price to string and returns the id of the created order" do
+      request = stub_post('/orders').with(
+        query: {key: "somekey"},
+        body: {
+          market: "BTCSTR",
+          type: "bid",
+          price: "202020.0",
+          amount: "0.002462689"
+        }
+      ).to_return(fixture("create_order.json"))
+      response = justcoin.create_order(:btcstr, :bid, 202020, bd("0.002462689"))
+      expect(request).to have_been_requested
+      expect(response.id).to eq(4089635)
+    end
+  end
+
+  describe '#cancel_order' do
+    before do
+      stub_delete('/orders/4094455').with(query: {key: "somekey"}).to_return(fixture("cancel_order.json"))
+    end
+
+    it "returns true if cancelling was successful" do
+      response = justcoin.cancel_order(4094455)
+      expect(response).to be(true)
+    end
+  end
+
 end
