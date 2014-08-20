@@ -18,9 +18,21 @@ Or install it yourself as:
 
 ## Usage
 
+* [Documentation](http://rubydoc.info/github/lackac/justcoin)
+
+### Example
+
 ``` ruby
 client = Justcoin.new(ENV['JUSTCOIN_KEY'])
-client.balances # => { USD: { balance: 40.0, hold: 0.0, available: 40.0 }, STR: ... }
+
+# fetch current BTC balance
+btc = client.balances.detect {|b| b.currency == "BTC"}
+
+# fetch market stats for BTCSTR
+btcstr = client.markets.detect {|m| m.id == "BTCSTR"}
+
+# sell half of available BTC for STR in a limit order
+client.place_order(:btcstr, :ask, btcstr.ask-0.001, btc.available/2)
 ```
 
 ## Contributing
